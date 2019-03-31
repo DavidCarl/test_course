@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mario Pizzabar</title>
+</head>
+
+<body>
+    <div>
+        <h1>Mario Pizzabar</h1>
+        <table>
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Price in €</th>
+            </tr>
+            <tr id='Annanas'>
+                <td>1</td>
+                <td>Annanas</td>
+                <td>1000</td>
+            </tr>
+            <tr id='Salat'>
+                <td>2</td>
+                <td>Salat</td>
+                <td>1000</td>
+            </tr>
+            <tr id='Tomat'>
+                <td>3</td>
+                <td>Tomat</td>
+                <td>1000</td>
+            </tr>
+        </table>
+    
+        <div>
+            <h2>Order</h2>
+            Name: <input id='cust' type="text">
+            Pizza: <input id='pizza' type='number'>
+            <button id='sendOrder' onclick="order()">Order</button>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            function order() {
+                var jsonObj = {
+                    'name': document.getElementById('cust').value,
+                    'pizza': document.getElementById('pizza').value
+                }
+
+                fetch('/makeOrder', {
+                    method: 'POST',
+                    body: JSON.stringify(jsonObj)
+                }).then(
+                    console.log(jsonObj)
+                )   
+            }
+        </script>
+    </div>
+</body>
+
+</html>
