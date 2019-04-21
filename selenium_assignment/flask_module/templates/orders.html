@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Mario Pizzabar</title>
+</head>
+
+<body>
+    <div>
+        <h1>Marios Pizzabar</h1>
+        <br>
+        <h2>What you ordered!</h2>
+        <div id='orders'>
+            <script>
+                let div = document.getElementById('orders')
+
+                let pizzaObj = {
+                    1: {'name': 'Annanas', 'price':'1000'},
+                    2: {'name': 'Salat', 'price':'1000'},
+                    3: {'name': 'Tomat', 'price':'1000'}
+                }
+
+                fetch('/makeOrder')
+                    .then((resp) => resp.json())
+                    .then(function (data) {
+                        for(var k in pizzaObj) {
+                            if(data.orders[0].pizza == k){
+                                let html =  '<h3 id="name">' + data.orders[0].name + '</h3><table id="orderTable"><tr><th>Number</th><th>Name</th><th>Price</th></tr>' +
+                                '<tr><td>' + k + '</td><td>' + pizzaObj[k].name + '</td><td>' + pizzaObj[k].price + '</td></tr></table>'
+                                div.innerHTML = html
+                            }
+                        }
+                    })
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
